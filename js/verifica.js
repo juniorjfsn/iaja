@@ -203,7 +203,8 @@ var autentica;
 			// {"Cod":0,"Msg":"Seu Aparelho foi desconecato do IAJA com sucesso !!","Url":"https://appiaja.adventistas.org/webapiiaja/MainMenu/imei="}
 			try {   
 				if (json.Cod === 0) {
-					alert(json.Msg); 
+			 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 					window.location.href="index.html";
 				} 
 			} catch (e) {
