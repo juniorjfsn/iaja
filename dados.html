@@ -56,7 +56,123 @@
 				height:auto;
 				overflow: auto;
 			}
-		</style
+		</style>
+
+
+		<!-- jQuery 3 --> 
+		<script src="dist/js/jquery.min.js"></script> 
+
+		<!-- v4.0.0-alpha.6 --> 
+		<!--
+		<script src="dist/bootstrap/js/bootstrap.min.js"></script> 
+		-->
+		<!-- PHONEGAP --> 
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript">
+		app.initialize();
+		</script>
+
+        <!-- template --> 
+        <script src="dist/js/niche.js"></script> 
+
+		<!-- DataTable --> 
+		<script src="dist/plugins/datatables/jquery.dataTables.min.js"></script> 
+		<script src="dist/plugins/datatables/dataTables.bootstrap.min.js"></script> 
+ 
+ 
+		<script src="js/config.js"></script> 
+		<script src="js/verifica.js"></script>
+	
+		<script src="js/funcoes.js"></script>
+		<script src="js/funcoes-dados.js"></script>
+		
+		<input type="hidden" name="qtde_tabelas"  id="qtde_tabelas" value="0">
+		<input type="hidden" name="qtde_tabelas_conta"  id="qtde_tabelas_conta" value="0">
+		
+		<script type="text/javascript">
+			$(document).ready(function()
+			{
+				//Se esta rodando no App ou no Browser
+				window.isphone = false;
+
+				if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
+				{
+					window.isphone = true;
+				}         
+				if( window.isphone )
+				{
+					document.addEventListener("deviceready", onDeviceReady, false);
+				}
+				else
+				{
+					onDeviceReady();
+				}
+			});
+
+			function alertDismissed()
+			{
+			    // do something
+			}
+
+			//Funcões e configurações
+			function onDeviceReady()
+			{
+			    var info
+			    var networkState = navigator.connection.type;
+			    
+			    //Sem conexão
+			    if(networkState == 'none')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido! É necessário estar conectado na Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão desconhecida
+			    else if(networkState == 'unknown')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido! É necessário estar conectado na Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão genérica
+			    else if(networkState == 'cell')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido corretamente! Requer uma melhor conexão com a Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão 2G
+			    else if(networkState == 'cell_2g')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido corretamente! Requer uma melhor conexão com a Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    else
+			    {
+
+					//========= get Dados JSON =============//
+					var params = location.getQueryParams();
+					//var Menu =  params['Menu'] ;  
+					if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
+						$('#nomeUsuario').empty().html(params['nomeusuario']); 
+					}  
+					if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
+						var Url = descodifica(params['Url']);  
+						console.log(Url);
+						if(verifica.verificaRegistro(servidor,device.uuid )){
+							renderizador.carregaDadosDaGrid(Url,device.uuid );
+						}else{
+							window.location.href="login.html";
+						} 
+						// console.log( Url)  
+					}else{
+						window.location.href="menu_dados.html";
+					}   
+				}
+			}
+		</script>  
 	</head>
 	<body class="skin-blue sidebar-mini">
 		<div class="wrapper boxed-wrapper">
@@ -160,98 +276,11 @@
 						</div>
 					</div> 
 					<section class="info-box" id="tabeladinamica" style="display:none;"> 
-						 
-							<!--
-							<div class="table-responsive" >
-								<table id="example1" class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th>Rendering engine</th>
-											<th>Browser</th>
-											<th>Platform(s)</th>
-											<th>Engine version</th>
-											<th>CSS grade</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Trident</td>
-											<td>Internet
-											Explorer 4.0
-											</td>
-											<td>Win 95+</td>
-											<td> 4</td>
-											<td>X</td>
-										</tr>
-										<tr>
-											<td>Trident</td>
-											<td>Internet
-											Explorer 5.0
-											</td>
-											<td>Win 95+</td>
-											<td>5</td>
-											<td>C</td>
-										</tr>
-										<tr>
-											<td>Trident</td>
-											<td>Internet
-											Explorer 5.5
-											</td>
-											<td>Win 95+</td>
-											<td>5.5</td>
-											<td>A</td>
-										</tr>
-									</tbody>
-									<tfoot>
-										<tr>
-											<th>Rendering engine</th>
-											<th>Browser</th>
-											<th>Platform(s)</th>
-											<th>Engine version</th>
-											<th>CSS grade</th>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-							-->
+			 
 						 
 					</section> 
 					<section class="info-box" id="tabeladinamica2" style="display:none;">
-						<!--
-						<div class="table-responsive" >
-							<table id="dadosConta" class="table table-bordered table-striped">
-								<thead>
-									<tr>
-										<th>Rendering engine</th>
-										<th>Browser</th>
-										<th>Platform(s)</th>
-										<th>Engine version</th>
-										<th>CSS grade</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>Trident</td>
-										<td>Internet
-										Explorer 4.0
-										</td>
-										<td>Win 95+</td>
-										<td> 4</td>
-										<td>X</td>
-									</tr>
-									<tr>
-										<td>Trident</td>
-										<td>Internet
-										Explorer 5.0
-										</td>
-										<td>Win 95+</td>
-										<td>5</td>
-										<td>C</td>
-									</tr> 
-								</tbody> 
-							</table>
-						</div>
-						-->
+		 
 					</section>
 					<section style="text-align:center;">
 						<img style="width:30%;" src="loading-ring.gif" id="carregando">
@@ -271,82 +300,5 @@
 		</div>
 		<!-- ./wrapper --> 
 
-		<!-- jQuery 3 --> 
-		<script src="dist/js/jquery.min.js"></script> 
-
-		<!-- v4.0.0-alpha.6 --> 
-		<!--
-		<script src="dist/bootstrap/js/bootstrap.min.js"></script> 
-		-->
-		<!-- PHONEGAP --> 
-		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript">
-		app.initialize();
-		</script>
-
-        <!-- template --> 
-        <script src="dist/js/niche.js"></script> 
-
-		<!-- DataTable --> 
-		<script src="dist/plugins/datatables/jquery.dataTables.min.js"></script> 
-		<script src="dist/plugins/datatables/dataTables.bootstrap.min.js"></script> 
-		<script>
-			$(function () {
-				/*
-				$('#example1').DataTable({
-					'code'      : false,
-					'Verba': false,
-					'Prov'   : false,
-					'Desc'        : false,
-					'Ord'    : true 
-				}) ;
-				*/
-				/*
-				$('#example2').DataTable({
-					'paging'      : false,
-					'lengthChange': false,
-					'searching'   : false,
-					'ordering'    : true,
-					'info'        : false,
-					'autoWidth'   : false
-				});
-				*/
-			});
-		</script>
- 
-		<script src="js/config.js"></script> 
-		<script src="js/verifica.js"></script>
-	
-		<script src="js/funcoes.js"></script>
-		<script src="js/funcoes-dados.js"></script>
-		
-		<input type="hidden" name="qtde_tabelas"  id="qtde_tabelas" value="0">
-		<input type="hidden" name="qtde_tabelas_conta"  id="qtde_tabelas_conta" value="0">
-		
-		<script type="text/javascript"> 
-			$(document).ready(function() { 
-			
-				//========= get Dados JSON =============//
-                var params = location.getQueryParams();
-				//var Menu =  params['Menu'] ;  
-				if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
-					$('#nomeUsuario').empty().html(params['nomeusuario']); 
-				}  
-				if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
-					var Url = descodifica(params['Url']);  
-					console.log(Url);
-					if(verifica.verificaRegistro(servidor,imei)){
-						renderizador.carregaDadosDaGrid(Url,imei);
-					}else{
-						window.location.href="login.html";
-					} 
-					// console.log( Url)  
-				}else{
-					window.location.href="menu_dados.html";
-				}   
-            }); 
-			
-		</script>  
 	</body>
 </html>

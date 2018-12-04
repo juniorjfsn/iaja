@@ -384,8 +384,8 @@ txt += "" + navigator.platform + "";
 // var imei = "d41d8cd98f00b204e9800998ecf8427e";
 // var imei = "d41d8cd98f00b204e9800998ecf842rrdwerwerwer7e";
 
-var imei =   md5(txt);
-console.log(imei);
+//var imei =   md5(txt);
+//console.log(imei);
  
 
 

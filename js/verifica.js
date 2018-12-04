@@ -131,23 +131,24 @@ var autentica;
 		}).done(function(json) {
 			try {
 				if (json.Cod === 0) {
-					alert(json.Msg);
+					//alert(json.Msg);
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 					window.location.href="menu_dados.html";
 				} 
 				else if(json.Cod === 1) {
-					alert(json.Msg); 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 				}
 				else if(json.Cod === 3) {
-					alert(json.Msg); 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 				}else if(json.Cod === 4) {
-					alert(json.Msg); 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 				} 
 			} catch (e) {
 				console.log(e.message); 
 			}
 		}).fail(function( jqxhr, textStatus, error ) {
-		var err = textStatus + ", " + error;
-		console.log( "Request Failed: " + err );
+			var err = textStatus + ", " + error;
+			console.log( "Request Failed: " + err );
 		});  
 	} 
 	//---------//
@@ -160,20 +161,20 @@ var autentica;
 		}).done(function(json) { 
 			console.log(JSON.stringify(json)); 
 			try {  
-				if (json.Cod === 2) {
-					alert(json.Msg);
+				if (json.Cod === 2) { 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 					$('#LoginToken').css('display','block');
 					$('#login').css('display','none');
 				} 
 				else if(json.Cod === 1) {
-					alert(json.Msg);  
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar'); 
 				} else if(json.Cod === 3) {
-					alert(json.Msg);
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
 
 				}else if(json.Cod === 4) {
-					alert(json.Msg); 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar'); 
 				} else if(json.Cod === 0) {
-					alert(json.Msg); 
+					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar'); 
 					window.location.href="menu_dados.html";
 				} 
 			} catch (e) {
@@ -181,7 +182,8 @@ var autentica;
 			}
 			console.log( "second success" );
 		}).fail(function( jqxhr, textStatus, error ) {
-			alert('Servidor não encontrado!  : '   + Url); 
+			//alert('Servidor não encontrado!  : '   + Url); 
+			navigator.notification.alert(device.uuid, alertDismissed, 'Servidor não encontrado!  : ', 'Fechar');
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		}).always(function() {
@@ -209,7 +211,8 @@ var autentica;
 			}
 			console.log( "second success" );
 		}).fail(function( jqxhr, textStatus, error ) {
-			alert('Servidor não encontrado!  : '   + Url); 
+			//alert('Servidor não encontrado!  : '   + Url); 
+			navigator.notification.alert(device.uuid, alertDismissed, 'Servidor não encontrado!  : ', 'Fechar');
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});  

@@ -1,29 +1,131 @@
 ﻿<!DOCTYPE html>
 <html lang="pt-BR">
 	<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>APP IAJA</title>
-	<!-- Tell the browser to be responsive to screen width -->
-	<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>APP IAJA</title>
+		<!-- Tell the browser to be responsive to screen width -->
+		<meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
 
-	<!-- v4.0.0-alpha.6 -->
-	<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
+		<!-- v4.0.0-alpha.6 -->
+		<link rel="stylesheet" href="dist/bootstrap/css/bootstrap.min.css">
 
-	<!-- Google Font -->
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+		<!-- Google Font -->
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
 
-	<!-- Theme style -->
-	<link rel="stylesheet" href="dist/css/style.css">
-	<link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
-	<link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
-	<link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
+		<!-- Theme style -->
+		<link rel="stylesheet" href="dist/css/style.css">
+		<link rel="stylesheet" href="dist/css/font-awesome/css/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/css/et-line-font/et-line-font.css">
+		<link rel="stylesheet" href="dist/css/themify-icons/themify-icons.css">
 
-	<!-- Chartist CSS -->
-	<link rel="stylesheet" href="dist/plugins/chartist-js/chartist.min.css">
-	<link rel="stylesheet" href="dist/plugins/chartist-js/chartist-init.css">
-	<link rel="stylesheet" href="dist/plugins/chartist-js/chartist-plugin-tooltip.css">
- 
+		<!-- Chartist CSS -->
+		<link rel="stylesheet" href="dist/plugins/chartist-js/chartist.min.css">
+		<link rel="stylesheet" href="dist/plugins/chartist-js/chartist-init.css">
+		<link rel="stylesheet" href="dist/plugins/chartist-js/chartist-plugin-tooltip.css">
+
+		<!-- jQuery 3 --> 
+		<script src="dist/js/jquery.min.js"></script>  
+		<!-- template --> 
+		<script src="dist/js/niche.js"></script>
+
+		<!-- PHONEGAP --> 
+		<script type="text/javascript" src="cordova.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript">
+			app.initialize();
+		</script>
+
+		<script src="js/config.js"></script> 
+		<script src="js/verifica.js"></script>
+		<script src="js/funcoes.js"></script> 
+		<script src="js/funcoes-menu-dados.js"></script>
+		<script type="text/javascript">
+			$(document).ready(function()
+			{
+				//Se esta rodando no App ou no Browser
+				window.isphone = false;
+
+				if(document.URL.indexOf("http://") === -1 && document.URL.indexOf("https://") === -1)
+				{
+					window.isphone = true;
+				}         
+				if( window.isphone )
+				{
+					document.addEventListener("deviceready", onDeviceReady, false);
+				}
+				else
+				{
+					onDeviceReady();
+				}
+			});
+
+			function alertDismissed()
+			{
+			    // do something
+			}
+
+			//Funcões e configurações
+			function onDeviceReady()
+			{
+			    var info
+			    var networkState = navigator.connection.type;
+			    
+			    //Sem conexão
+			    if(networkState == 'none')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido! É necessário estar conectado na Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão desconhecida
+			    else if(networkState == 'unknown')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido! É necessário estar conectado na Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão genérica
+			    else if(networkState == 'cell')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido corretamente! Requer uma melhor conexão com a Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    //Conexão 2G
+			    else if(networkState == 'cell_2g')
+			    {
+			        navigator.notification.alert('Este conteúdo não pode ser exibido corretamente! Requer uma melhor conexão com a Internet!', alertDismissed, 'Atenção', 'Fechar');
+			        window.location.href='index.html';
+			        exit;
+			    }
+			    else
+			    {
+					var  Url = servidor +'/webapiiaja/MainMenu?imei=' + device.uuid + '' ;
+					var params = location.getQueryParams(); 
+			 
+					if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
+						$('#nomeUsuario').empty().html(params['nomeusuario']); 
+					}  
+					if(verifica.verificaRegistro(servidor,device.uuid)){  
+						if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
+							Url = descodifica(params['Url'])  ;
+							$('#voltar').css('display','block');
+							$('#nome').empty().html(params['Menu']);
+							var UrlVolta = 'menu_dados.html?Url=' + codifica(Url) + '&Menu=' ; 
+							$('#linkVoltar').attr("href",UrlVolta); 
+							menurender.carregaMenu(Url,device.uuid);
+						}else{ 
+							menurender.carregaMenu(Url,device.uuid);
+							$('#voltar').css('display','none'); 
+							$('#nome').empty().html('Menu Principal');
+						} 
+					}else{
+						window.location.href="login.html";
+					} 
+				}
+			}
+		</script> 
 	</head>
 	<body class="hold-transition skin-blue sidebar-mini">
 		<div class="wrapper boxed-wrapper">
@@ -109,48 +211,6 @@
 			</div>
 			<!-- ./wrapper --> 
 		</div>
-		<!-- jQuery 3 --> 
-		<script src="dist/js/jquery.min.js"></script> 
 
-		<!-- template --> 
-		<script src="dist/js/niche.js"></script>
-
-		<!-- PHONEGAP --> 
-		<script type="text/javascript" src="cordova.js"></script>
-		<script type="text/javascript" src="js/index.js"></script>
-		<script type="text/javascript">
-			app.initialize();
-		</script>
-
-		<script src="js/config.js"></script> 
-		<script src="js/verifica.js"></script>
-		<script src="js/funcoes.js"></script> 
-		<script src="js/funcoes-menu-dados.js"></script>
-		<script type="text/javascript">
-			$(document).ready(function() { 
-				var  Url = servidor +'/webapiiaja/MainMenu?imei=' + imei + '' ;
-				var params = location.getQueryParams(); 
-		 
-				if(params['nomeusuario'] != undefined  && params['nomeusuario'] != null && params['nomeusuario'] != 'null' && params['nomeusuario'] != '' ){
-					$('#nomeUsuario').empty().html(params['nomeusuario']); 
-				}  
-				if(verifica.verificaRegistro(servidor,imei)){  
-					if(params['Url'] != undefined  && params['Url'] != null && params['Url'] != 'null' && params['Url'] != '' ){
-						Url = descodifica(params['Url'])  ;
-						$('#voltar').css('display','block');
-						$('#nome').empty().html(params['Menu']);
-						var UrlVolta = 'menu_dados.html?Url=' + codifica(Url) + '&Menu=' ; 
-						$('#linkVoltar').attr("href",UrlVolta); 
-						menurender.carregaMenu(Url,imei);
-					}else{ 
-						menurender.carregaMenu(Url,imei);
-						$('#voltar').css('display','none'); 
-						$('#nome').empty().html('Menu Principal');
-					} 
-				}else{
-					window.location.href="login.html";
-				} 
-			}); 
-		</script> 
 	</body>
 </html>
