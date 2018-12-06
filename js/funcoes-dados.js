@@ -323,7 +323,7 @@ var renderizador;
 			async : true,
 			statusCode: {
 				404: function() { 
-					navigator.notification.alert(device.uuid, alertDismissed, 'Página inacessível', 'Fechar');
+					navigator.notification.alert('Dados inacessíveis', alertDismissed, 'Erro', 'Fechar'); 
 					console.log('Página inacessível');
 				}
 			}
@@ -380,8 +380,8 @@ var renderizador;
 					$('#carregando').attr("src","");
 					$('#carregando').attr("display","none");
 				});  
-			}else{ 
-				navigator.notification.alert(device.uuid, alertDismissed, 'Página inacessível', 'Fechar');
+			}else{  
+				navigator.notification.alert('Dados inacessíveis', alertDismissed, 'Erro', 'Fechar'); 
 			} 
 		}).fail(function(jqXHR, textStatus, errorThrown  ) {  
 			console.log('----------------');
@@ -391,8 +391,8 @@ var renderizador;
 			console.log(textStatus);
 			console.log('....');
 			console.log(errorThrown);
-			console.log('----------------'); 
-			navigator.notification.alert(device.uuid, alertDismissed, 'Não foi possível acessar  esta tela com seus respectivos dados', 'Fechar');
+			console.log('----------------');  
+			navigator.notification.alert('Não foi possível acessar  esta tela com seus respectivos dados', alertDismissed, 'Erro', 'Fechar'); 
 			$('#tabeladinamica').css("display","none");
 		}).always(function() {
 			console.log( "complete" );

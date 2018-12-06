@@ -86,8 +86,8 @@ var menurender;
 				$('#linkVoltar').css('border-color','#bbb');
 			} 
 			
-		}else{ 
-			navigator.notification.alert(device.uuid, alertDismissed, 'Menú inacessível', 'Fechar');
+		}else{  
+			navigator.notification.alert('Menú inacessível', alertDismissed, 'Erro', 'Fechar');  
 		} 
 		return tabela;
 	}
@@ -128,8 +128,8 @@ var proc;
 			dataType: "json", 
 			async : true,
 			statusCode: {
-				404: function() { 
-					navigator.notification.alert(device.uuid, alertDismissed, 'Página inacessível', 'Fechar');
+				404: function() {  
+					navigator.notification.alert('Página inacessível', alertDismissed, 'Erro', 'Fechar'); 
 					console.log('Página inacessível');
 				}
 			}
@@ -140,7 +140,7 @@ var proc;
 			console.log(jqXHR);
 			console.log('_____'); 
 			var json = data ; 
-			navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+			navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar');
 			
 		}).fail(function(jqXHR, textStatus, errorThrown  ) {  
 			console.log('----------------');
@@ -150,8 +150,8 @@ var proc;
 			console.log(textStatus);
 			console.log('....');
 			console.log(errorThrown);
-			console.log('----------------'); 
-			navigator.notification.alert(device.uuid, alertDismissed, 'Não foi possível acessar  esta tela com seus respectivos dados', 'Fechar');
+			console.log('----------------');  
+			navigator.notification.alert('Não foi possível acessar  esta tela com seus respectivos dados', alertDismissed, 'Erro', 'Fechar'); 
 			$('#tabeladinamica').css("display","none");
 		}).always(function() {
 			console.log( "complete" );

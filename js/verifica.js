@@ -132,16 +132,16 @@ var autentica;
 			try {
 				if (json.Cod === 0) {
 					//alert(json.Msg);
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					window.location.href="menu_dados.html";
 				} 
-				else if(json.Cod === 1) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+				else if(json.Cod === 1) { 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');
 				}
 				else if(json.Cod === 3) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar'); 
 				}else if(json.Cod === 4) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar'); 
 				} 
 			} catch (e) {
 				console.log(e.message); 
@@ -161,20 +161,20 @@ var autentica;
 		}).done(function(json) { 
 			console.log(JSON.stringify(json)); 
 			try {  
-				if (json.Cod === 2) { 
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+				if (json.Cod === 2) {  
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar'); 
 					$('#LoginToken').css('display','block');
 					$('#login').css('display','none');
 				} 
 				else if(json.Cod === 1) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar'); 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');  
 				} else if(json.Cod === 3) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');  
 
 				}else if(json.Cod === 4) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar'); 
-				} else if(json.Cod === 0) {
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar'); 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');   
+				} else if(json.Cod === 0) { 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					window.location.href="menu_dados.html";
 				} 
 			} catch (e) {
@@ -182,8 +182,8 @@ var autentica;
 			}
 			console.log( "second success" );
 		}).fail(function( jqxhr, textStatus, error ) {
-			//alert('Servidor não encontrado!  : '   + Url); 
-			navigator.notification.alert(device.uuid, alertDismissed, 'Servidor não encontrado!  : ', 'Fechar');
+			//alert('Servidor não encontrado!  : '   + Url);  
+			navigator.notification.alert('Servidor não encontrado!  : ', alertDismissed, 'Erro', 'Fechar');  
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		}).always(function() {
@@ -202,9 +202,8 @@ var autentica;
 			console.log(JSON.stringify(json)); 
 			// {"Cod":0,"Msg":"Seu Aparelho foi desconecato do IAJA com sucesso !!","Url":"https://appiaja.adventistas.org/webapiiaja/MainMenu/imei="}
 			try {   
-				if (json.Cod === 0) {
-			 
-					navigator.notification.alert(device.uuid, alertDismissed, json.Msg, 'Fechar');
+				if (json.Cod === 0) {  
+					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					window.location.href="index.html";
 				} 
 			} catch (e) {
@@ -212,8 +211,8 @@ var autentica;
 			}
 			console.log( "second success" );
 		}).fail(function( jqxhr, textStatus, error ) {
-			//alert('Servidor não encontrado!  : '   + Url); 
-			navigator.notification.alert(device.uuid, alertDismissed, 'Servidor não encontrado!  : ', 'Fechar');
+			//alert('Servidor não encontrado!  : '   + Url);  
+			navigator.notification.alert('Servidor não encontrado!  : ', alertDismissed, 'Erro', 'Fechar');  
 			var err = textStatus + ", " + error;
 			console.log( "Request Failed: " + err );
 		});  
