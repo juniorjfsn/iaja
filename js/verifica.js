@@ -162,7 +162,7 @@ var autentica;
 			console.log(JSON.stringify(json)); 
 			try {  
 				if (json.Cod === 2) {  
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar'); 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					$('#LoginToken').css('display','block');
 					$('#login').css('display','none');
 				} 
