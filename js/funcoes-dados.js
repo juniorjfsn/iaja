@@ -110,6 +110,7 @@ var dadosconta;
 						,"bPaginate": var_bPaginate 
 						,"info": var_info
 						,"searching": var_searching
+						,"lengthChange": false
 					}); 
 				});  
 				console.log( "second success" );
@@ -373,6 +374,7 @@ var renderizador;
 							,"bPaginate": var_bPaginate 
 							,"info": var_info
 							,"searching": var_searching
+							,"lengthChange": false
 						});
 					}  
 					$('#carregando').attr("src","");
