@@ -136,12 +136,12 @@ var autentica;
 					window.location.href="menu_dados.html";
 				} 
 				else if(json.Cod === 1) { 
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');
+					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');
 				}
 				else if(json.Cod === 3) {
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar'); 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar'); 
 				}else if(json.Cod === 4) {
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar'); 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar'); 
 				} 
 			} catch (e) {
 				console.log(e.message); 
@@ -167,12 +167,12 @@ var autentica;
 					$('#login').css('display','none');
 				} 
 				else if(json.Cod === 1) {
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');  
+					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');  
 				} else if(json.Cod === 3) {
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');  
+					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');  
 
 				}else if(json.Cod === 4) {
-					navigator.notification.alert(json.Msg, alertDismissed, 'Alerta', 'Fechar');   
+					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');   
 				} else if(json.Cod === 0) { 
 					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					window.location.href="menu_dados.html";
