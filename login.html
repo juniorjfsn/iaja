@@ -128,7 +128,7 @@
                     var encryptedBytes = aesCtr.encrypt(textBytes);
                     var encryptedHex = aesjs.utils.hex.fromBytes(encryptedBytes);
                     //============================================================//
-                    $('#msg').empty().html(encryptedHex);
+                    // $('#msg').empty().html(encryptedHex);
 
                     //LOGIN
                     $("#buttonLogin").on("click", function(event) {
