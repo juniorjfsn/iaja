@@ -155,27 +155,35 @@ var autentica;
 	function efetuarLogin(cpf, nascimento, imei){  
 		var newcpf = cpf.replace(/[^\d]+/g,'')
 		var Url = servidor+'/webapiiaja/Login?cpf='+newcpf+'&nascimento='+nascimento+'&imei='+imei+'';	
-		console.log(Url); 
+		console.log(Url);
 		var jqxhr1 = $.getJSON( Url  , function() {
 			console.log( "success" );
 		}).done(function(json) { 
-			console.log(JSON.stringify(json)); 
+			console.log(JSON.stringify(json));
 			try {  
 				if (json.Cod === 2) {  
+
 					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					$('#LoginToken').css('display','block');
 					$('#login').css('display','none');
-				} 
-				else if(json.Cod === 1) {
+
+				} else if(json.Cod === 1) {
+
 					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');  
+
 				} else if(json.Cod === 3) {
+
 					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');  
 
 				}else if(json.Cod === 4) {
+
 					navigator.notification.alert(json.Msg, alertDismissed, 'Atenção', 'Fechar');   
+
 				} else if(json.Cod === 0) { 
+
 					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					window.location.href="menu_dados.html";
+
 				} 
 			} catch (e) {
 				console.log(e.message); 
@@ -190,7 +198,7 @@ var autentica;
 			console.log( "complete" );
 		});  
 	}
-	
+
 	//---------//
 	function efetuarLogout(cpf,  imei){  
 		var newcpf = cpf.replace(/[^\d]+/g,'')
