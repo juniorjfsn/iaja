@@ -58,7 +58,7 @@
 					var key = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ];
 
 					// Convert text to bytes 
-					var textBytes = aesjs.utils.utf8.toBytes(texto);
+					var textBytes = aesjs.utils.utf8.toBytes(String(texto));
 
 					// The counter is optional, and if omitted will begin at 1
 					var aesCtr = new aesjs.ModeOfOperation.ctr(key, new aesjs.Counter(5));
@@ -92,7 +92,7 @@
 		</script> 
 	</head>
 	<body>
-		<div id="texto">Rdorval Soluções</div><br/>
+		<div id="texto">865592031966278</div><br/>
 		<div id="textocriptografado"></div><br/><br/><br/><br/><br/><br/>
 
 		<div id="textoparadesencriptar">a539faa5d142d5ddc514980571a6f30d8586</div><br/>
