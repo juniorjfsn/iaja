@@ -1,4 +1,4 @@
-﻿//========= dadosconta =============//
+//========= dadosconta =============//
 var dadosconta; 
 (function (dadosconta) {
 	//---------// 
@@ -378,7 +378,7 @@ var renderizador;
 						});
 					}  
 					$('#carregando').attr("src","");
-					$('#carregando').attr("display","none");
+					$('#carregando').css("display","none");
 				});  
 			}else{  
 				navigator.notification.alert('Dados inacessíveis', alertDismissed, 'Erro', 'Fechar'); 
