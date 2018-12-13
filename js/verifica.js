@@ -213,6 +213,9 @@ var autentica;
 				if (json.Cod === 0) {  
 					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
 					window.location.href="index.html";
+				} else if(json.Cod === 4) { 
+					navigator.notification.alert(json.Msg, alertDismissed, 'Mensagem', 'Fechar'); 
+					window.location.href="login.html";
 				} 
 			} catch (e) {
 				console.log(e.message); 
