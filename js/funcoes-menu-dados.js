@@ -10,7 +10,10 @@ var menurender;
 		var posicao= parseInt(params['posicao']);   
 		var lista = json[posicao];   */
 		
-		$('#nomeUsuario').empty().html(json.Nome); 
+		if(json.Nome != undefined  && json.Nome != null && json.Nome != 'null' && json.Nome != '' )
+        {
+            $('#nomeUsuario').empty().html(json.Nome);
+        }
 		
 		if(json.UrlVolta != undefined && json.UrlVolta != null & json.UrlVolta != 'null' && json.UrlVolta != '' ){
 			var UrlVolta =    'menu_dados.html?Url=' +codifica(json.UrlVolta + imei)     +'&Menu=' ;

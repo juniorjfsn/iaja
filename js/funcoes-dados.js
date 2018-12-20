@@ -315,6 +315,7 @@ var renderizador;
 	 
 	//---------//
 	function carregaDadosDaGrid(urljson,imei) {
+		$('#carregando').css("display","block");
 		$.ajax({
 			url: urljson,
 			method: "GET",
@@ -341,7 +342,12 @@ var renderizador;
 			// $('#nome_usuario').empty().html(json.Nome);   
 			$('#tituloMenu').empty().html(json.Titulo); 
 			// $('#periodo').empty().html(json.Periodo); 
-			$('#nomeUsuario').empty().html(json.Nome); 
+			
+            if(json.Nome != undefined  && json.Nome != null && json.Nome != 'null' && json.Nome != '' )
+            {
+                $('#nomeUsuario').empty().html(json.Nome);
+            }
+                
 			var UrlVolta = 'menu_dados.html?Url=' + codifica(json.UrlVolta + imei) + '&Menu=' ; 
 			$('#linkVoltar').attr("href",UrlVolta);
 
